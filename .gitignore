@@ -1,0 +1,5 @@
+yolov8*.pt
+wall-crack-detection-*
+runs
+crack
+noncrack
