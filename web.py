@@ -6,13 +6,13 @@ import cv2
 
 app = Flask(__name__)
 socketio = SocketIO(app)
-model = YOLO('best.pt')
+model = YOLO('best detect.pt')
 model_classify = YOLO('best classify.pt')
-crack = 12
-noncrack = 78
+crack = 50
+noncrack = 50
 
 def clasify_crack():
-    cap = cv2.VideoCapture("wallvid.mp4")
+    cap = cv2.VideoCapture(0)
     while True:
         ret, frame = cap.read()
         frame = cv2.resize(frame, (640, 480), interpolation=cv2.INTER_AREA)
@@ -59,6 +59,4 @@ def handle_update_noncrack(json):
     emit('update_noncrack', noncrack, broadcast=True)
 
 if __name__ == '__main__':
-    model.predict('crack/7081-9.jpg')
-    model_classify.predict('crack/7081-9.jpg')
     socketio.run(app, debug=True)
